@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calendario</title>
+  <style>
+    :root {
+      --bg: #121212;
+      --surface: #1e1e1e;
+      --primary: #bb86fc;
+      --on-surface: #e0e0e0;
+      --today-bg: #3700b3;
+      --today-color: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Roboto", sans-serif;
+      background-color: var(--bg);
+      color: var(--on-surface);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      font-weight: 400;
+      color: var(--primary);
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 400px;
+      background-color: var(--surface);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #2a2a2a;
+      font-weight: 500;
+    }
+
+    td {
+      border: 1px solid #333;
+      color: var(--on-surface);
+    }
+
+    td.today {
+      background-color: var(--today-bg);
+      color: var(--today-color);
+      font-weight: bold;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <h2 id="month-year"></h2>
+  <table id="calendar"></table>
+
+  <script>
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const todayDate = now.getDate();
+
+    const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    const days = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+
+    document.getElementById("month-year").textContent = `${monthNames[month]} ${year}`;
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    const table = document.getElementById("calendar");
+    let html = "<tr>" + days.map(d => `<th>${d}</th>`).join("") + "</tr><tr>";
+
+    let dayOfWeek = firstDay;
+    for (let i = 0; i < dayOfWeek; i++) html += "<td></td>";
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      if (dayOfWeek === 7) {
+        html += "</tr><tr>";
+        dayOfWeek = 0;
+      }
+
+      const isToday = day === todayDate;
+      html += `<td class="${isToday ? 'today' : ''}">${day}</td>`;
+      dayOfWeek++;
+    }
+
+    while (dayOfWeek < 7) {
+      html += "<td></td>";
+      dayOfWeek++;
+    }
+
+    html += "</tr>";
+    table.innerHTML = html;
+  </script>
+</body>
+</html>

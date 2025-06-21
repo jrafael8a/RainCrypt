@@ -1,0 +1,20 @@
+<html>
+<head>
+<script type="text/javascript">
+function setZoom(zoom) {
+  document.body.style.zoom = zoom;
+}
+
+window.onload = function() {
+  // Define el nivel de zoom que deseas, por ejemplo, 0.8 para un 80% de zoom
+  var desiredZoom = 0.55;
+  setZoom(desiredZoom);
+};
+</script>
+</head>
+
+<body>
+<script src="https://widgets.coingecko.com/gecko-coin-price-chart-widget.js"></script>
+<gecko-coin-price-chart-widget locale="en" dark-mode="true" coin-id="bitcoin" initial-currency="usd"></gecko-coin-price-chart-widget>
+</body>
+</html>

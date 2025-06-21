@@ -1,0 +1,24 @@
+<html>
+<head>
+<script type="text/javascript">
+function setZoom(zoom) {
+  document.body.style.zoom = zoom;
+}
+
+window.onload = function() {
+  // Define el nivel de zoom que deseas, por ejemplo, 0.8 para un 80% de zoom
+  var desiredZoom = 0.55;
+  setZoom(desiredZoom);
+};
+</script>
+</head>
+
+<body>
+<div class="tradingview-widget-container">
+  <script src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js">{
+    "symbol": "BITSTAMP:BTCUSD",
+    "theme": "dark"
+  }</script>
+</div>
+</body>
+</html>
